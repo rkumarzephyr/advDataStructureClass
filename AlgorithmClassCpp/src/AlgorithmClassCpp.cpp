@@ -94,16 +94,50 @@ void testQueue() {
 
 void testHeapSort()
 {
-   int array[10];
-   for(int i = 0; i <= 9;i++)
-   {
-	   array[i] = rand();
-	   cout<<array[i]<<" ";
-   }
+   int array[10] = {41, 18, 63, 27, 19, 15, 11, 29, 26, 24};
 
    MaxHeap m(array,10);
-   m.heapify();
+   m.sort();
+   cout<<endl<<"final"<<endl;
+   m.print();
+   m.sort(); // check that calling sort again is not a problem
+   cout<<endl<<"final2"<<endl;
+   cout<<endl;
+   m.print();
+
 }
+
+void testHeapSortMax_priorityQueue()
+{
+	int array[10] = { 41, 18, 63, 27, 19, 15, 11, 29, 26, 24 }; // can keep 10 elements
+
+	MaxHeap m(array, 10);
+
+	m.heapify();
+
+	m.increaseKey(0, 65);
+
+	if (m.heap_extract_maximum() == 65)
+		cout << "OK" << endl;
+	else
+		cout << "NOK" << endl;
+
+	if (m.heap_extract_maximum() == 41)
+		cout << "OK" << endl;
+	else
+		cout << "NOK" << endl;
+
+	m.increaseKey(7, 100);
+	if (m.heap_extract_maximum() == 100)
+		cout << "OK" << endl;
+	else
+		cout << "NOK" << endl;
+
+	m.insert(100);
+	m.print();
+}
+
+
 int main() {
 	//testBinarySearchTree();
 
@@ -113,7 +147,8 @@ int main() {
 
 	//testQueue();
 
-	testHeapSort();
+	//testHeapSort();
+	testHeapSortMax_priorityQueue();
 
 	return 0;
 }
